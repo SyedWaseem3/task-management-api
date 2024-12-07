@@ -3,7 +3,16 @@ const { getTasks, createTask, updateTask, deleteTask } = require("../controllers
 const authMiddleware = require("../middlewares/authMiddleware");
 const multer = require("multer");
 
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    }
+  });
+
+  const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.use(authMiddleware);
