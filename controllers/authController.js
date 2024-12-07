@@ -25,7 +25,7 @@ exports.signup = async (req, res) => {
 
 const loginSchema = Joi.object({
     username: Joi.string().email().required(),
-    password: Joi.string().min(6).required,
+    password: Joi.string().min(6).required(),
 })
 
 exports.login = async (req, res) => {
